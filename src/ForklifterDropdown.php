@@ -1,0 +1,164 @@
+<?php
+
+namespace Kanata\Forklift;
+
+use Livewire\Component;
+
+class ForklifterDropdown extends Component
+{
+    const EVENT_ASSET_MOVED = 'asset-moved';
+    const EVENT_ASSET_MOVE_FAILED = 'asset-move-failed';
+
+    /**
+     * @var int|null
+     */
+    public ?int $assetBeingMoved = null;
+
+    /**
+     * Id of the Asset that hold assets that we are moving around.
+     *
+     * @var ?int
+     */
+    public ?int $currentLocationId = null;
+
+    /**
+     * Class name of the asset type.
+     *
+     * @var string|null
+     */
+    public ?string $assetType = null;
+
+    /**
+     * Class name of the location type.
+     *
+     * @var string|null
+     */
+    public ?string $locationType = null;
+
+    /**
+     * @var string AssetRepositoryInterface
+     */
+    public string $assetRepository;
+
+    /**
+     * @important Locations are expected to have "$location->id" as record id.
+     * @important Locations are expected to have "$location->title" as the record name.
+     * @var array
+     */
+    public array $locations = [];
+    public int $page = 1;
+
+    /**
+     * @param int|null $currentLocationId Location where the asset is now.
+     * @param string $locationType Location model type (class name).
+     * @param int $assetId Asset being moved id.
+     * @param string $assetType Asset model type (class name).
+     * @param string $assetRepository Repository to run procedures.
+     * @return void
+     */
+    public function mount(
+        ?int $currentLocationId,
+        string $locationType,
+        int $assetId,
+        string $assetType,
+        string $assetRepository
+    ) {
+        $this->assetRepository = $assetRepository;
+
+        // TODO: if this fail, show on UI that the component is not functional
+        //       right now we are throwing an exception.
+        $this->checkLocationType($locationType);
+        $this->locationType = $locationType;
+
+        // TODO: if this fail, show on UI that the component is not functional
+        //       right now we are throwing an exception.
+        $this->checkAssetType($assetType);
+        $this->assetType = $assetType;
+
+        $this->assetBeingMoved = $assetId;
+        $this->currentLocationId = $currentLocationId;
+        $this->changeCurrentNavigation($this->currentLocationId);
+    }
+
+    private function checkAssetType(string $assetType)
+    {
+        // TODO: check if assetType has necessary interface:
+        // - find
+    }
+
+    private function checkLocationType(string $locationType)
+    {
+        // TODO: check if assetType has necessary interface:
+        // - find
+    }
+
+    /**
+     * Navigate to a new directory.
+     *
+     * @param ?int $asset_id
+     * @param int $page
+     * @return void
+     */
+    public function changeCurrentNavigation(
+        ?int $assetId,
+        int $page = 1
+    ): void {
+        $this->currentLocationId = $assetId;
+
+        /**
+         * @important $location expected to have "$location->id" as the id of the element.
+         * @important $location expected to have "$location->parent" as the parent element.
+         * @important $location expected to have "$location->title" as the name of the element.
+         */
+        $this->locations = $this->assetRepository::changeCurrentLocation(
+            location_type: $this->locationType,
+            moved_asset_id: $this->assetBeingMoved,
+            location_id: $this->currentLocationId,
+            page: $page,
+        );
+    }
+
+    /**
+     * Move element to the new place.
+     *
+     * @return void
+     */
+    public function moveAsset() {
+        $result = $this->assetRepository::moveAsset(
+            asset_type: $this->assetType,
+            moved_asset_id: $this->assetBeingMoved,
+            location_id: $this->currentLocationId,
+        );
+
+        if ($result) {
+            $this->emitUp(self::EVENT_ASSET_MOVED, [
+                'asset_type' => $this->assetType,
+                'moved_asset_id' => $this->assetBeingMoved,
+                'location_type' => $this->locationType,
+                'location_id' => $this->currentLocationId,
+            ]);
+            return;
+        }
+
+        $this->emitUp(self::EVENT_ASSET_MOVED_FAILED, [
+            'asset_type' => $this->assetType,
+            'moved_asset_id' => $this->assetBeingMoved,
+            'location_type' => $this->locationType,
+            'location_id' => $this->currentLocationId,
+        ]);
+    }
+
+    public function render()
+    {
+        /**
+         * @important $asset expected to have "$asset->id" as the id of the element.
+         * @important $asset expected to have "$asset->parent" as the parent element.
+         * @important $asset expected to have "$asset->title" as the name of the element.
+         */
+        $location = $this->assetType::find($this->currentLocationId);
+
+        return view('forklift::forklifter-dropdown', [
+            'location' => $location,
+        ]);
+    }
+}
