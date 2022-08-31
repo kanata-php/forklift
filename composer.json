@@ -1,5 +1,5 @@
 {
-    "name": "kanata/forklift",
+    "name": "kanata-php/forklift",
     "description": "Livewire package to move models around.",
     "license": "MIT",
     "autoload": {
