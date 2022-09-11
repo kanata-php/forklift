@@ -43,7 +43,7 @@ jobs:
       run: composer run-script test
 
     - name: Run test coverage
-      run: composer run-script coverage ./coverage
+      run: composer run-script coverage ./coverage/index.xml
 
     - name: Upload coverage reports to Codecov
       run: |
