@@ -34,7 +34,7 @@ jobs:
       run: |
         curl -Os https://uploader.codecov.io/latest/linux/codecov
         chmod +x codecov
-        ./codecov -t ${CODECOV_TOKEN}
+        ./codecov -t ${{ secrets.CODECOV_TOKEN }}
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md

@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <build time="Sun Sep 11 23:09:43 UTC 2022" phpunit="9.5.24" coverage="9.2.17">
+    <runtime name="PHP" version="8.1.9" url="https://secure.php.net/"/>
+    <driver name="pcov" version="1.0.11"/>
+  </build>
+  <project source="/home/savior/Code/Playground/laravel-test/packages/kanata-php/forklift/src">
+    <tests>
+      <test name="Kanata\Forklift\Tests\Feature\ForkliftDropdownTest::test_initial_location_id" size="unknown" result="0" status="PASSED"/>
+      <test name="Kanata\Forklift\Tests\Feature\ForkliftDropdownTest::test_change_location" size="unknown" result="0" status="PASSED"/>
+      <test name="Kanata\Forklift\Tests\Feature\ForkliftDropdownTest::test_move_directory_asset" size="unknown" result="0" status="PASSED"/>
+      <test name="Kanata\Forklift\Tests\Feature\ForkliftDropdownTest::test_move_document_asset" size="unknown" result="0" status="PASSED"/>
+    </tests>
+    <directory name="/">
+      <totals>
+        <lines total="286" comments="78" code="208" executable="37" executed="36" percent="97.30"/>
+        <methods count="5" tested="4" percent="80.00"/>
+        <functions count="0" tested="0" percent="0"/>
+        <classes count="1" tested="0" percent="0.00"/>
+        <traits count="0" tested="0" percent="0"/>
+      </totals>
+      <directory name="Events">
+        <totals>
+          <lines total="55" comments="3" code="52" executable="0" executed="0" percent="0"/>
+          <methods count="0" tested="0" percent="0"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="0" tested="0" percent="0"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+        <directory name="Abstractions">
+          <totals>
+            <lines total="33" comments="3" code="30" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+          <file name="ForkliftEvent.php" href="Events/Abstractions/ForkliftEvent.php.xml">
+            <totals>
+              <lines total="33" comments="3" code="30" executable="0" executed="0" percent="0"/>
+              <methods count="0" tested="0" percent="0"/>
+              <functions count="0" tested="0" percent="0"/>
+              <classes count="0" tested="0" percent="0"/>
+              <traits count="0" tested="0" percent="0"/>
+            </totals>
+          </file>
+        </directory>
+        <file name="AssetMoveFailed.php" href="Events/AssetMoveFailed.php.xml">
+          <totals>
+            <lines total="11" comments="0" code="11" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="AssetMoved.php" href="Events/AssetMoved.php.xml">
+          <totals>
+            <lines total="11" comments="0" code="11" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+      <directory name="Interfaces">
+        <totals>
+          <lines total="21" comments="0" code="21" executable="0" executed="0" percent="0"/>
+          <methods count="0" tested="0" percent="0"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="0" tested="0" percent="0"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+        <file name="AssetRepositoryInterface.php" href="Interfaces/AssetRepositoryInterface.php.xml">
+          <totals>
+            <lines total="21" comments="0" code="21" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+      <file name="ForkliftDropdown.php" href="ForkliftDropdown.php.xml">
+        <totals>
+          <lines total="186" comments="72" code="114" executable="37" executed="36" percent="97.30"/>
+          <methods count="5" tested="4" percent="80.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+      </file>
+      <file name="ForkliftServiceProvider.php" href="ForkliftServiceProvider.php.xml">
+        <totals>
+          <lines total="24" comments="3" code="21" executable="0" executed="0" percent="0"/>
+          <methods count="0" tested="0" percent="0"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="0" tested="0" percent="0"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+      </file>
+    </directory>
+  </project>
+</phpunit>
