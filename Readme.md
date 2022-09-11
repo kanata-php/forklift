@@ -3,8 +3,9 @@
 <img src="./docs/forklift.png" height="200"/>
 </p>
 
-
 # Forklift
+
+[![Tests](https://github.com/kanata-php/forklift/actions/workflows/php.yml/badge.svg)](https://github.com/kanata-php/forklift/actions/workflows/php.yml)
 
 > Laravel Livewire Component
 
