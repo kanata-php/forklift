@@ -24,5 +24,10 @@
     },
     "require": {
         "livewire/livewire": "^2.10"
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit"
+        ]
     }
 }
