@@ -1,12 +1,14 @@
 
-<p style="display: flex;align-items: center;justify-content: center;gap: 50px;">
+<p align="center">
 <img src="./docs/forklift.png" style="max-height: 200px;"/>
-<span style="font-size: 50px;font-weight: bold;">Forklift</span>
 </p>
+
+
+# Forklift
 
 > Laravel Livewire Component
 
-<p style="text-align: center;">
+<p align="center">
 <img src="./docs/screenshot.png" />
 </p>
 
