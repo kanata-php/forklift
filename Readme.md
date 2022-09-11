@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src="./docs/forklift.png" style="max-height: 150px;"/>
+<img src="./docs/forklift.png" height="200"/>
 </p>
 
 
