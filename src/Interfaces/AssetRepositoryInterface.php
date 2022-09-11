@@ -15,5 +15,6 @@ interface AssetRepositoryInterface
         string $asset_type,
         int $moved_asset_id,
         ?int $location_id,
+        string $parent_field = 'parent',
     ): bool;
 }

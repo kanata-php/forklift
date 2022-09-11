@@ -2,13 +2,12 @@
 
 namespace Kanata\Forklift;
 
+use Kanata\Forklift\Events\AssetMoved;
+use Kanata\Forklift\Events\AssetMoveFailed;
 use Livewire\Component;
 
-class ForklifterDropdown extends Component
+class ForkliftDropdown extends Component
 {
-    const EVENT_ASSET_MOVED = 'asset-moved';
-    const EVENT_ASSET_MOVE_FAILED = 'asset-move-failed';
-
     /**
      * @var int|null
      */
@@ -41,6 +40,13 @@ class ForklifterDropdown extends Component
     public string $assetRepository;
 
     /**
+     * Asset's field pointing to the location.
+     *
+     * @var string
+     */
+    public string $parentField;
+
+    /**
      * @important Locations are expected to have "$location->id" as record id.
      * @important Locations are expected to have "$location->title" as the record name.
      * @var array
@@ -54,6 +60,7 @@ class ForklifterDropdown extends Component
      * @param int $assetId Asset being moved id.
      * @param string $assetType Asset model type (class name).
      * @param string $assetRepository Repository to run procedures.
+     * @param string $parentField Asset's field pointing to the location.
      * @return void
      */
     public function mount(
@@ -61,9 +68,11 @@ class ForklifterDropdown extends Component
         string $locationType,
         int $assetId,
         string $assetType,
-        string $assetRepository
+        string $assetRepository,
+        string $parentField = 'parent',
     ) {
         $this->assetRepository = $assetRepository;
+        $this->parentField = $parentField;
 
         // TODO: if this fail, show on UI that the component is not functional
         //       right now we are throwing an exception.
@@ -95,15 +104,15 @@ class ForklifterDropdown extends Component
     /**
      * Navigate to a new directory.
      *
-     * @param ?int $asset_id
+     * @param ?int $locationId
      * @param int $page
      * @return void
      */
     public function changeCurrentNavigation(
-        ?int $assetId,
+        ?int $locationId,
         int $page = 1
     ): void {
-        $this->currentLocationId = $assetId;
+        $this->currentLocationId = $locationId;
 
         /**
          * @important $location expected to have "$location->id" as the id of the element.
@@ -128,24 +137,36 @@ class ForklifterDropdown extends Component
             asset_type: $this->assetType,
             moved_asset_id: $this->assetBeingMoved,
             location_id: $this->currentLocationId,
+            parent_field: $this->parentField,
         );
 
         if ($result) {
-            $this->emitUp(self::EVENT_ASSET_MOVED, [
-                'asset_type' => $this->assetType,
-                'moved_asset_id' => $this->assetBeingMoved,
-                'location_type' => $this->locationType,
-                'location_id' => $this->currentLocationId,
-            ]);
+            $this->dispatchForkliftEvent(AssetMoved::class);
             return;
         }
 
-        $this->emitUp(self::EVENT_ASSET_MOVED_FAILED, [
+        $this->dispatchForkliftEvent(AssetMoveFailed::class);
+    }
+
+    private function dispatchForkliftEvent(string $event)
+    {
+        // laravel event
+        $event::dispatch(
+            $this->assetType,
+            $this->assetBeingMoved,
+            $this->locationType,
+            $this->currentLocationId,
+        );
+
+        // livewire events
+        $eventData = [
             'asset_type' => $this->assetType,
             'moved_asset_id' => $this->assetBeingMoved,
             'location_type' => $this->locationType,
             'location_id' => $this->currentLocationId,
-        ]);
+        ];
+        $this->emit($event::EVENT_NAME, $eventData);
+        $this->dispatchBrowserEvent($event::EVENT_NAME, $eventData);
     }
 
     public function render()
@@ -155,9 +176,9 @@ class ForklifterDropdown extends Component
          * @important $asset expected to have "$asset->parent" as the parent element.
          * @important $asset expected to have "$asset->title" as the name of the element.
          */
-        $location = $this->assetType::find($this->currentLocationId);
+        $location = $this->locationType::find($this->currentLocationId);
 
-        return view('forklift::forklifter-dropdown', [
+        return view('forklift::forklift-dropdown', [
             'location' => $location,
         ]);
     }

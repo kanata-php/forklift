@@ -5,6 +5,9 @@ namespace Kanata\Forklift;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ForkliftServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -15,6 +18,6 @@ class ForkliftServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/forklift'),
         ]);
 
-        Livewire::component('forklifter-dropdown', ForklifterDropdown::class);
+        Livewire::component('forklift-dropdown', ForkliftDropdown::class);
     }
 }

@@ -7,12 +7,22 @@
             "Kanata\\Forklift\\": "src/"
         }
     },
-    "require": {},
+    "autoload-dev": {
+        "psr-4": {
+            "Kanata\\Forklift\\Tests\\": "tests"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
                 "Kanata\\Forklift\\ForkliftServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0"
+    },
+    "require": {
+        "livewire/livewire": "^2.10"
     }
 }

@@ -12,7 +12,8 @@
             <div class="-translate-y-1 -translate-x-1 w-full grid grid-cols-1 self-stretch text-base text-black ring-1 ring-black ring-offset-0 ring-offset-transparent transform transition-transform bg-white transform active:-translate-y-0 active:-translate-x-0">
                 <button
                     @click="showNavigationDropdown = ! showNavigationDropdown"
-                    type="button" class="inline-flex w-full items-center justify-center"
+                    type="button"
+                    class="inline-flex w-full items-center justify-center"
                     id="menu-button"
                     aria-expanded="true"
                     aria-haspopup="true"
@@ -71,7 +72,7 @@
                     <span class="sr-only">Back</span>
                 </button>
             @else
-                <button class="text-gray-500 block mx-1 my-1 p-2 text-sm hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0" wire:loading.remove>
+                <button class="text-gray-200 block mx-1 my-1 p-2 text-sm cursor-not-allowed" role="menuitem">
                     <!-- Heroicon name: solid/chevron-left -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
