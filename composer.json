@@ -28,6 +28,9 @@
     "scripts": {
         "test": [
             "vendor/bin/phpunit"
+        ],
+        "coverage": [
+            "vendor/bin/phpunit --coverage-xml ./coverage"
         ]
     }
 }
