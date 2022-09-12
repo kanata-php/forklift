@@ -30,7 +30,7 @@
             "vendor/bin/phpunit"
         ],
         "coverage": [
-            "vendor/bin/phpunit --coverage-xml ./coverage"
+            "vendor/bin/phpunit --coverage-xml ./"
         ]
     }
 }
