@@ -7,6 +7,8 @@
 
 [![Tests](https://github.com/kanata-php/forklift/actions/workflows/php.yml/badge.svg)](https://github.com/kanata-php/forklift/actions/workflows/php.yml)
 
+[![codecov](https://codecov.io/gh/kanata-php/forklift/branch/master/graph/badge.svg?token=BEAL7MLFFA)](https://codecov.io/gh/kanata-php/forklift)
+
 > Laravel Livewire Component
 
 <p align="center">
