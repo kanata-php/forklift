@@ -5,9 +5,10 @@
 
 # Forklift
 
-[![Tests](https://github.com/kanata-php/forklift/actions/workflows/php.yml/badge.svg)](https://github.com/kanata-php/forklift/actions/workflows/php.yml)
-
-[![codecov](https://codecov.io/gh/kanata-php/forklift/branch/master/graph/badge.svg?token=BEAL7MLFFA)](https://codecov.io/gh/kanata-php/forklift)
+<p align="left">
+<a href="https://github.com/kanata-php/forklift/actions/workflows/php.yml"><img src="https://github.com/kanata-php/forklift/actions/workflows/php.yml/badge.svg" alt="Tests"></a>
+<a href="https://codecov.io/gh/kanata-php/forklift"><img src="https://codecov.io/gh/kanata-php/forklift/branch/master/graph/badge.svg?token=BEAL7MLFFA" alt="Code Coverage"></a>
+</p>
 
 > Laravel Livewire Component
 
