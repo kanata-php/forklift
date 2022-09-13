@@ -4,6 +4,7 @@ namespace Kanata\Forklift\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\View;
 use Kanata\Forklift\Events\AssetMoved;
 use Kanata\Forklift\ForkliftDropdown;
 use Kanata\Forklift\Tests\Samples\AssetRepository;
@@ -139,5 +140,23 @@ class ForkliftDropdownTest extends TestCase
             'id' => $this->document->id,
             'directory_id' => $this->directory->id,
         ]);
+    }
+
+    /**
+     * @covers \Kanata\Forklift\ForkliftDropdown
+     */
+    public function test_custom_template()
+    {
+        View::addNamespace('samples', 'tests/Samples/Views');
+
+        Livewire::test(ForkliftDropdown::class, [
+            'currentLocationId' => null,
+            'locationType' => DirectoryModelSample::class,
+            'assetId' => $this->document->id,
+            'assetType' => DocumentModelSample::class,
+            'assetRepository' => AssetRepository::class,
+            'parentField' => 'directory_id',
+            'template' => 'samples::test',
+        ])->assertSee('test-template');
     }
 }

@@ -8,7 +8,7 @@
     }"
 >
     <div class="flex items-center justify-end ">
-        <div class="flex h-9 w-64 border border-black focus:outline-none bg-black">
+        <div class="flex h-9 border border-black focus:outline-none bg-black">
             <div class="-translate-y-1 -translate-x-1 w-full grid grid-cols-1 self-stretch text-base text-black ring-1 ring-black ring-offset-0 ring-offset-transparent transform transition-transform bg-white transform active:-translate-y-0 active:-translate-x-0">
                 <button
                     @click="showNavigationDropdown = ! showNavigationDropdown"
@@ -18,9 +18,9 @@
                     aria-expanded="true"
                     aria-haspopup="true"
                 >
-                    <div class="w-4/5">Move Asset</div>
+                    <div class="ml-4 mr-2 whitespace-nowrap">{{ $location?->title ?? 'Root' }}</div>
 
-                    <div class="inline-flex w-1/5 items-center justify-center">
+                    <div class="inline-flex w-1/5 mr-4 items-center justify-center">
                         <!-- Heroicon name: solid/chevron-down -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#4b5563" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                     </div>

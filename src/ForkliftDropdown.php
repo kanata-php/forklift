@@ -47,6 +47,13 @@ class ForkliftDropdown extends Component
     public string $parentField;
 
     /**
+     * Template name to be loaded for the presentation.
+     *
+     * @var string
+     */
+    public string $template;
+
+    /**
      * @important Locations are expected to have "$location->id" as record id.
      * @important Locations are expected to have "$location->title" as the record name.
      * @var array
@@ -61,6 +68,7 @@ class ForkliftDropdown extends Component
      * @param string $assetType Asset model type (class name).
      * @param string $assetRepository Repository to run procedures.
      * @param string $parentField Asset's field pointing to the location.
+     * @param string $template Template's name to be loaded.
      * @return void
      */
     public function mount(
@@ -70,9 +78,11 @@ class ForkliftDropdown extends Component
         string $assetType,
         string $assetRepository,
         string $parentField = 'parent',
+        string $template = 'default',
     ) {
         $this->assetRepository = $assetRepository;
         $this->parentField = $parentField;
+        $this->template = $template;
 
         // TODO: if this fail, show on UI that the component is not functional
         //       right now we are throwing an exception.
@@ -178,7 +188,7 @@ class ForkliftDropdown extends Component
          */
         $location = $this->locationType::find($this->currentLocationId);
 
-        return view('forklift::forklift-dropdown', [
+        return view('default' === $this->template ? 'forklift::forklift-dropdown' : $this->template, [
             'location' => $location,
         ]);
     }
