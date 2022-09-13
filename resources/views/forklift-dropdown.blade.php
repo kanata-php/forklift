@@ -18,7 +18,7 @@
                     aria-expanded="true"
                     aria-haspopup="true"
                 >
-                    <div class="ml-4 mr-2 whitespace-nowrap">{{ $location?->title ?? 'Root' }}</div>
+                    <div class="ml-4 mr-2 whitespace-nowrap">{{ $previousLocation ?? 'Root' }}</div>
 
                     <div class="inline-flex w-1/5 mr-4 items-center justify-center">
                         <!-- Heroicon name: solid/chevron-down -->

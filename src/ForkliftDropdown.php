@@ -62,6 +62,13 @@ class ForkliftDropdown extends Component
     public int $page = 1;
 
     /**
+     * Location before navigation
+     *
+     * @var ?string
+     */
+    public ?string $previousLocation;
+
+    /**
      * @param int|null $currentLocationId Location where the asset is now.
      * @param string $locationType Location model type (class name).
      * @param int $assetId Asset being moved id.
@@ -88,6 +95,7 @@ class ForkliftDropdown extends Component
         //       right now we are throwing an exception.
         $this->checkLocationType($locationType);
         $this->locationType = $locationType;
+        $this->previousLocation = $this->locationType::find($this->currentLocationId)?->title;
 
         // TODO: if this fail, show on UI that the component is not functional
         //       right now we are throwing an exception.
@@ -151,6 +159,7 @@ class ForkliftDropdown extends Component
         );
 
         if ($result) {
+            $this->previousLocation = $this->locationType::find($this->currentLocationId)?->title;
             $this->dispatchForkliftEvent(AssetMoved::class);
             return;
         }
