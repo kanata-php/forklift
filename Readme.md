@@ -60,6 +60,8 @@ Methods:
 
 ## Usage
 
+### Basics
+
 Let's assume we have a filesystem structure. In this structure you have documents and directories. This package adds a dropdown that allows quickly moving assets in the directory structure.
 
 For such, using eloquent, we would have the models:
@@ -114,6 +116,19 @@ The following component is the dropdown to move directories:
 ```
 
 You can find an example laravel project [here](https://github.com/kanata-php/forklift-example).
+
+### Events
+
+Forklift dispatches 2 events, in 3 different levels. The 2 events are:
+
+- `Kanata\Forklift\Events\AssetMoved` - Triggered after a successful return from the asset repository.
+- `Kanata\Forklift\Events\AssetMoveFailed` - Triggered after a fail return from th asset repository.
+
+The 3 levels that these events are dispatched are:
+
+- Laravel Events (https://laravel.com/docs/9.x/events#main-content)
+- Livewire Events (https://laravel-livewire.com/docs/2.x/events)
+- Browser events via Livewire (https://laravel-livewire.com/docs/2.x/events#browser)
 
 ## Todo
 
