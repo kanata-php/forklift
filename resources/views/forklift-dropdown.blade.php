@@ -64,7 +64,7 @@
             </svg>
 
             @if (null !== $location)
-                <button @click="$wire.changeCurrentNavigation({{ $location->parent ?? 'null' }}, 1)" class="text-gray-700 block mx-1 my-1 p-2 text-sm hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0" wire:loading.remove>
+                <button @click="$wire.changeCurrentNavigation({{ $location['parent'] ?? null }}, 1)" class="text-gray-700 block mx-1 my-1 p-2 text-sm hover:bg-gray-200" role="menuitem" tabindex="-1" id="menu-item-0" wire:loading.remove>
                     <!-- Heroicon name: solid/chevron-left -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -83,7 +83,7 @@
 
             <div class="">
                 <div class="text-gray-500 text-xs mr-2">Current Location:</div>
-                <div class="">{{ $location?->title ?? 'Root' }}</div>
+                <div class="">{{ $location['title'] ?? 'Root' }}</div>
             </div>
         </div>
 
@@ -109,14 +109,14 @@
 
                 <template x-if="locations.current_page > 1">
                     <div class="flex gap-0">
-                        <button @click="$wire.changeCurrentNavigation({{ $location?->id ?? 'null' }}, 1)" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-200">
+                        <button @click="$wire.changeCurrentNavigation({{ $location['id'] ?? null }}, 1)" class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-200">
                             <span class="sr-only">First Page</span>
                             <!-- Heroicon name: solid/chevron-double-left -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                             </svg>
                         </button>
-                        <button @click="$wire.changeCurrentNavigation({{ $location?->id ?? 'null' }}, locations.current_page - 1)" class="bg-white border border-black text-gray-500 hover:bg-gray-200 relative inline-flex items-center px-4 py-2 text-sm font-medium">
+                        <button @click="$wire.changeCurrentNavigation({{ $location['id'] ?? null }}, locations.current_page - 1)" class="bg-white border border-black text-gray-500 hover:bg-gray-200 relative inline-flex items-center px-4 py-2 text-sm font-medium">
                             <span class="sr-only">Previous</span>
                             <!-- Heroicon name: solid/chevron-left -->
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -146,18 +146,18 @@
                 </template>
 
                 <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-                <button @click="$wire.changeCurrentNavigation({{ $location?->id ?? 'null' }}, locations.current_page)" class="bg-white border border-black text-gray-500 hover:bg-gray-200 relative inline-flex items-center px-4 py-2 text-sm font-medium" x-text="locations.current_page"></button>
+                <button @click="$wire.changeCurrentNavigation({{ $location['id'] ?? null }}, locations.current_page)" class="bg-white border border-black text-gray-500 hover:bg-gray-200 relative inline-flex items-center px-4 py-2 text-sm font-medium" x-text="locations.current_page"></button>
 
                 <template x-if="locations.current_page !== locations.last_page">
                     <div class="flex gap-0">
-                        <button @click="$wire.changeCurrentNavigation({{ $location?->id ?? 'null' }}, locations.current_page + 1)" class="bg-white border border-black text-gray-500 hover:bg-gray-200 relative inline-flex items-center px-4 py-2 text-sm font-medium">
+                        <button @click="$wire.changeCurrentNavigation({{ $location['id'] ?? null }}, locations.current_page + 1)" class="bg-white border border-black text-gray-500 hover:bg-gray-200 relative inline-flex items-center px-4 py-2 text-sm font-medium">
                             <span class="sr-only">Next</span>
                             <!-- Heroicon name: solid/chevron-right -->
                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                             </svg>
                         </button>
-                        <button @click="$wire.changeCurrentNavigation({{ $location?->id ?? 'null' }}, locations.last_page)" class="relative inline-flex items-center px-2 py-2 bg-white text-sm font-medium text-gray-500 hover:bg-gray-200">
+                        <button @click="$wire.changeCurrentNavigation({{ $location['id'] ?? null }}, locations.last_page)" class="relative inline-flex items-center px-2 py-2 bg-white text-sm font-medium text-gray-500 hover:bg-gray-200">
                             <span class="sr-only">Last Page</span>
                             <!-- Heroicon name: solid/chevron-double-right -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

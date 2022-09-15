@@ -40,13 +40,6 @@ class ForkliftDropdown extends Component
     public string $assetRepository;
 
     /**
-     * Asset's field pointing to the location.
-     *
-     * @var string
-     */
-    public string $parentField;
-
-    /**
      * Template name to be loaded for the presentation.
      *
      * @var string
@@ -74,7 +67,6 @@ class ForkliftDropdown extends Component
      * @param int $assetId Asset being moved id.
      * @param string $assetType Asset model type (class name).
      * @param string $assetRepository Repository to run procedures.
-     * @param string $parentField Asset's field pointing to the location.
      * @param string $template Template's name to be loaded.
      * @return void
      */
@@ -84,18 +76,17 @@ class ForkliftDropdown extends Component
         int $assetId,
         string $assetType,
         string $assetRepository,
-        string $parentField = 'parent',
         string $template = 'default',
     ) {
         $this->assetRepository = $assetRepository;
-        $this->parentField = $parentField;
         $this->template = $template;
 
         // TODO: if this fail, show on UI that the component is not functional
         //       right now we are throwing an exception.
         $this->checkLocationType($locationType);
         $this->locationType = $locationType;
-        $this->previousLocation = $this->locationType::find($this->currentLocationId)?->title;
+        $previousLocation = $this->assetRepository::findLocation($this->currentLocationId);
+        $this->previousLocation = $previousLocation['title'] ?? null;
 
         // TODO: if this fail, show on UI that the component is not functional
         //       right now we are throwing an exception.
@@ -138,7 +129,6 @@ class ForkliftDropdown extends Component
          * @important $location expected to have "$location->title" as the name of the element.
          */
         $this->locations = $this->assetRepository::changeCurrentLocation(
-            location_type: $this->locationType,
             moved_asset_id: $this->assetBeingMoved,
             location_id: $this->currentLocationId,
             page: $page,
@@ -152,14 +142,13 @@ class ForkliftDropdown extends Component
      */
     public function moveAsset() {
         $result = $this->assetRepository::moveAsset(
-            asset_type: $this->assetType,
             moved_asset_id: $this->assetBeingMoved,
             location_id: $this->currentLocationId,
-            parent_field: $this->parentField,
         );
 
         if ($result) {
-            $this->previousLocation = $this->locationType::find($this->currentLocationId)?->title;
+            $previousLocation = $this->assetRepository::findLocation($this->currentLocationId);
+            $this->previousLocation = $previousLocation['title'] ?? null;
             $this->dispatchForkliftEvent(AssetMoved::class);
             return;
         }
@@ -195,7 +184,7 @@ class ForkliftDropdown extends Component
          * @important $asset expected to have "$asset->parent" as the parent element.
          * @important $asset expected to have "$asset->title" as the name of the element.
          */
-        $location = $this->locationType::find($this->currentLocationId);
+        $location = $this->assetRepository::findLocation($this->currentLocationId);
 
         return view('default' === $this->template ? 'forklift::forklift-dropdown' : $this->template, [
             'location' => $location,

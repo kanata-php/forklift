@@ -4,7 +4,7 @@ namespace Kanata\Forklift\Tests\Samples;
 
 use Kanata\Forklift\Interfaces\AssetRepositoryInterface;
 
-class AssetRepository implements AssetRepositoryInterface
+class DirectoryAssetRepository implements AssetRepositoryInterface
 {
     /**
      * @param int|null $moved_asset_id The directory of this form.
@@ -33,8 +33,9 @@ class AssetRepository implements AssetRepositoryInterface
         int $moved_asset_id,
         ?int $location_id,
     ): bool {
-        $asset = DocumentModelSample::find($moved_asset_id);
-        $asset->directory_id = $location_id;
+        $asset = DirectoryModelSample::find($moved_asset_id);
+        $asset->parent = $location_id;
+        $asset->parent = $location_id;
         return $asset->save();
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use Kanata\Forklift\Events\AssetMoved;
 use Kanata\Forklift\ForkliftDropdown;
 use Kanata\Forklift\Tests\Samples\AssetRepository;
+use Kanata\Forklift\Tests\Samples\DirectoryAssetRepository;
 use Kanata\Forklift\Tests\Samples\DirectoryModelSample;
 use Kanata\Forklift\Tests\Samples\DocumentModelSample;
 use Kanata\Forklift\Tests\TestCase;
@@ -91,7 +92,7 @@ class ForkliftDropdownTest extends TestCase
             'locationType' => DirectoryModelSample::class,
             'assetId' => $directory2->id,
             'assetType' => DirectoryModelSample::class,
-            'assetRepository' => AssetRepository::class,
+            'assetRepository' => DirectoryAssetRepository::class,
         ])
             ->call('changeCurrentNavigation', $this->directory->id)
             ->call('moveAsset', $this->directory->id)

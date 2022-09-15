@@ -50,13 +50,19 @@ After this you'll find the assets at the directory `resources/views/vendor/forkl
 
 **Step 3**
 
-Implement the `Kanata\Forklift\Interfaces\AssetRepositoryInterface` for the component to know how to interact with your project's models.
+Implement the `Kanata\Forklift\Interfaces\AssetRepositoryInterface` for the component to know how to interact with your project's models. You'll create one per case (e.g. if you need to move nested directories, one repository, then if you need to move documents through directories, another repository).
 
 Methods:
 
 - `AssetRepositoryInterface::changeCurrentLocation` - This method returns current location's "sub locations". This is equivalent to sub folders when you have a folder based structure like a filesystem navigation.
 
-- `AssetRepositoryInterface::moveAsset` - This method executes the movement between locations of the asset being managed.  
+- `AssetRepositoryInterface::moveAsset` - This method executes the movement between locations of the asset being managed.
+
+- `AssetRepositoryInterface::findLocation` - This method finds the current location object.
+  > The output must be an array with the following fields:
+  > - id (int) - primary key
+  > - title (string) - location's title
+  > - parent (int) - parent location (for nested locations)
 
 ## Usage
 
@@ -66,7 +72,7 @@ Let's assume we have a filesystem structure. In this structure you have document
 
 For such, using eloquent, we would have the models:
 
-- **Directory** - that keeps the directries structure, having subdirectories and documents inside them.
+- **Directory** - that keeps the directories structure, having subdirectories and documents inside them.
 > Example migration:
 > ```php
 > Schema::create('directories', function (Blueprint $table) {
