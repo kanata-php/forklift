@@ -98,13 +98,13 @@ class ForkliftDropdown extends Component
         $this->changeCurrentNavigation($this->currentLocationId);
     }
 
-    private function checkAssetType(string $assetType)
+    protected function checkAssetType(string $assetType)
     {
         // TODO: check if assetType has necessary interface:
         // - find
     }
 
-    private function checkLocationType(string $locationType)
+    protected function checkLocationType(string $locationType)
     {
         // TODO: check if assetType has necessary interface:
         // - find

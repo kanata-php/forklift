@@ -2,6 +2,7 @@
     "name": "kanata-php/forklift",
     "description": "Livewire package to move models around.",
     "license": "MIT",
+    "keywords": ["laravel", "livewire", "file", "directory", "folder"],
     "autoload": {
         "psr-4": {
             "Kanata\\Forklift\\": "src/"
